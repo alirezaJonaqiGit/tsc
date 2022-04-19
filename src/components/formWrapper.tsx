@@ -4,16 +4,16 @@ import { UserInterface } from '../usersList';
 import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { useState } from "react";
 
-function FormWrapper(props: {users: UserInterface[], setUsers: any, user: UserInterface, setUser: any}) {
+function FormWrapper(props: {users: UserInterface[], setUsers: any, user: UserInterface, setUser: any, findUser: any}) {
     
     // یوزر رو بر اساس آیدی پیدا میکنه و یه آبجکت میده بیرون
-    const findUser = (id: number) => {
-        return props.users.find(user => user.ID === id);
-    }
+    // const findUser = (id: number) => {
+    //     return props.users.find(user => user.ID === id);
+    // }
 
     const handleChange = (event:any) => {
         // event.target.value == user.ID
-        let user = findUser(event.target.value);
+        let user = props.findUser(event.target.value);
         props.setUser({
             ...props.user,
             first_name: user?.first_name,

@@ -3,6 +3,7 @@ import usersList, { UserInterface } from '../usersList';
 import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import FormWrapper from './formWrapper';
+import List from './list';
 
 
 
@@ -16,31 +17,14 @@ function Wrapper() {
         return users.find(user => user.ID === id);
     }
 
-    const handleEdit = (event: any) => {
-        // event.target.value == user.ID
-        // event.target.value is string by default
-        let clickedUser =  findUser(Number(event.target.value));
-        setUser(clickedUser);
-    };
 
     return ( 
         <>
             <div className="container shadow ">
                 <div className="px-4">
-                    <FormWrapper user={user} setUser={setUser} users={users} setUsers={setUsers}  />
+                    <FormWrapper user={user} setUser={setUser} users={users} setUsers={setUsers} findUser={findUser}  />
                     <div className="hr"></div>
-                    <table className='w-100 '>
-                        {users.map((user, i) => {
-                            return (<tr key = {i}>
-                                <td> {user.first_name} </td>
-                                <td> {user.last_name}</td>
-                                <td> {user.gender === 'true'? 'male' : 'female'}</td>
-                                <td> {user.ID}</td>
-                                <td> {user.phone} </td>
-                                <td> <button value={user.ID} onClick={handleEdit} className='btn btn-success'>edit</button> </td>
-                            </tr>)
-                        })}
-                    </table>
+                    <List users={users} findUser={findUser} setUser={setUser} />
                 </div>
             </div>
         </>
